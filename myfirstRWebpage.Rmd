@@ -1,0 +1,35 @@
+---
+title: "MyfirstWebpageR"
+author: "Balaji K"
+date: "11 February 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+```
+
+```{R}
+mywd <- setwd("~/R/03. R Projects/Coursera projects/Developing Data Products/Wk2Assignment")
+#include the installed leaflet library
+
+library(leaflet)
+set.seed(1000)
+mydf  <- data.frame( lat = c(28.3845075, 28.4072806, 28.3757187),
+                     lng = c(-81.6709071, -81.6453189, -81.5969962) )
+
+myPlaces <- c(
+  "<a href='https://disneyworld.disney.go.com/?CMP=OKC_wdw_gmap_421'>Walt Disney World Resort</a>",
+  "<a href='https://disneyworld.disney.go.com/destinations/animal-kingdom/?CMP=OKC-wdw_gmap_118'>Disneys Animal Kingdom </a>",
+  "<a href='https://www.espnwwos.com/?CMP=OKC-wdw_sports_gmap_27'>ESPN Sports Complex </a>"
+)
+#wineryIcon <- makeIcon("Wine Glass-50.png", 48, 48)  
+myIcon <- leaflet::makeIcon("marker-icon.png",10,20)
+
+myMap <- mydf %>% 
+  leaflet() %>%
+  leaflet::addTiles() %>% 
+  leaflet::setView(lng = -81.6709071, lat = 28.3845075,  zoom = 10) %>% 
+  leaflet::addMarkers(icon=myIcon, popup = "My places of interest")
+myMap
+```
